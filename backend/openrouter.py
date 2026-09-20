@@ -139,6 +139,14 @@ async def query_model(
 
                     is_token = _is_token_limit_error(error_message)
 
+                    # 401 – unauthorized / invalid key
+                    if response.status_code == 401:
+                        raise OpenRouterError(
+                            "Invalid OpenRouter API key (401: User not found). Please update OPENROUTER_API_KEY in your .env file with a valid key from https://openrouter.ai/keys.",
+                            status_code=401,
+                            is_token_limit=False,
+                        )
+
                     # 402 – billing / quota
                     if response.status_code == 402:
                         raise OpenRouterError(

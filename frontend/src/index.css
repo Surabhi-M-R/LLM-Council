@@ -1,12 +1,48 @@
 :root {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  /* AWS Management Console Color Palette */
+  --aws-header-bg: #0f1b2a;
+  --aws-header-border: #1f2d3d;
+  --aws-nav-bg: #16202c;
+  --aws-nav-hover: #212c3d;
+  --aws-nav-active: #2b394a;
+  --aws-main-bg: #0d131a;
+  --aws-card-bg: #151d28;
+  --aws-card-header: #1c2636;
+  --aws-border: #283648;
+  --aws-border-subtle: #1f2937;
+
+  --aws-orange: #ff9900;
+  --aws-orange-hover: #ec7211;
+  --aws-orange-light: rgba(255, 153, 0, 0.12);
+  --aws-orange-glow: rgba(255, 153, 0, 0.25);
+
+  /* Claude Ember & Warm Aesthetics */
+  --claude-warm-amber: #d97706;
+  --claude-warm-ember: #f59e0b;
+  --claude-spark: #eb6f25;
+  --claude-glow: rgba(245, 158, 11, 0.15);
+  --claude-card-bg: #1a1714;
+  --claude-border: #382d22;
+
+  /* Neuros Neural Accents */
+  --neuros-teal: #10b981;
+  --neuros-cyan: #06b6d4;
+  --neuros-purple: #8b5cf6;
+
+  /* Text colors */
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  font-family: var(--font-sans);
   line-height: 1.5;
   font-weight: 400;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
 }
 
 * {
@@ -19,7 +55,10 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #f5f5f5;
+  background: var(--aws-main-bg);
+  color: var(--text-primary);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 #root {
@@ -28,13 +67,41 @@ body {
   overflow: hidden;
 }
 
-/* Global markdown styling */
+/* Custom AWS Dark Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d131a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #253346;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff9900;
+}
+
+/* Claude Markdown content styling */
 .markdown-content {
-  padding: 12px;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #e2e8f0;
+}
+
+.markdown-content.claude-typography {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .markdown-content p {
-  margin: 0 0 12px 0;
+  margin: 0 0 14px 0;
 }
 
 .markdown-content p:last-child {
@@ -44,55 +111,92 @@ body {
 .markdown-content h1,
 .markdown-content h2,
 .markdown-content h3,
-.markdown-content h4,
-.markdown-content h5,
-.markdown-content h6 {
-  margin: 16px 0 8px 0;
+.markdown-content h4 {
+  margin: 18px 0 10px 0;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: -0.2px;
 }
 
-.markdown-content h1:first-child,
-.markdown-content h2:first-child,
-.markdown-content h3:first-child,
-.markdown-content h4:first-child,
-.markdown-content h5:first-child,
-.markdown-content h6:first-child {
-  margin-top: 0;
+.markdown-content h1 {
+  font-size: 1.4em;
+}
+
+.markdown-content h2 {
+  font-size: 1.25em;
+  border-bottom: 1px solid var(--aws-border);
+  padding-bottom: 4px;
+}
+
+.markdown-content h3 {
+  font-size: 1.1em;
+  color: var(--aws-orange);
 }
 
 .markdown-content ul,
 .markdown-content ol {
-  margin: 0 0 12px 0;
-  padding-left: 24px;
+  margin: 0 0 14px 0;
+  padding-left: 22px;
 }
 
 .markdown-content li {
-  margin: 4px 0;
+  margin: 5px 0;
 }
 
 .markdown-content pre {
-  background: #f5f5f5;
-  padding: 12px;
-  border-radius: 4px;
+  background: #090d14;
+  border: 1px solid var(--aws-border);
+  padding: 14px;
+  border-radius: 6px;
   overflow-x: auto;
-  margin: 0 0 12px 0;
+  margin: 12px 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #f8fafc;
 }
 
 .markdown-content code {
-  background: #f5f5f5;
+  background: rgba(255, 153, 0, 0.1);
+  color: #ffb84d;
   padding: 2px 6px;
-  border-radius: 3px;
-  font-family: monospace;
-  font-size: 0.9em;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  border: 1px solid rgba(255, 153, 0, 0.2);
 }
 
 .markdown-content pre code {
   background: none;
   padding: 0;
+  border: none;
+  color: inherit;
 }
 
 .markdown-content blockquote {
-  margin: 0 0 12px 0;
-  padding-left: 16px;
-  border-left: 4px solid #ddd;
-  color: #666;
+  margin: 14px 0;
+  padding: 8px 16px;
+  border-left: 3px solid var(--aws-orange);
+  background: rgba(255, 153, 0, 0.05);
+  color: #cbd5e1;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Claude Shimmer Animated Bar */
+.claude-shimmer-bar {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, #d97706 0%, #f59e0b 50%, #eb6f25 100%);
+  background-size: 200% 100%;
+  animation: claude-shimmer 2s infinite linear;
+  border-radius: 2px;
+}
+
+@keyframes claude-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }

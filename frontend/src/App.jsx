@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import AWSHeader from './components/AWSHeader';
 import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
 import { api } from './api';
@@ -27,8 +28,10 @@ function App() {
     try {
       const convs = await api.listConversations();
       setConversations(convs);
+      setErrorMessage('');
     } catch (error) {
       console.error('Failed to load conversations:', error);
+      setErrorMessage(error.message || 'Unable to connect to backend server at http://localhost:8001');
     }
   };
 
@@ -154,12 +157,10 @@ function App() {
             break;
 
           case 'title_complete':
-            // Reload conversations to get updated title
             loadConversations();
             break;
 
           case 'complete':
-            // Stream complete, reload conversations list
             loadConversations();
             setIsLoading(false);
             break;
@@ -188,7 +189,6 @@ function App() {
       });
     } catch (error) {
       console.error('Failed to send message:', error);
-      // Remove optimistic messages on error
       setCurrentConversation((prev) => ({
         ...prev,
         messages: prev.messages.slice(0, -2),
@@ -199,22 +199,29 @@ function App() {
 
   return (
     <div className="app">
+      <AWSHeader currentConversationTitle={currentConversation?.title} />
+
       {errorMessage && (
         <div className="banner-error">
-          {errorMessage}
+          <div className="aws-error-badge">AWS::Neuros::Error</div>
+          <span>{errorMessage}</span>
+          <button className="error-close-btn" onClick={() => setErrorMessage('')}>×</button>
         </div>
       )}
-      <Sidebar
-        conversations={conversations}
-        currentConversationId={currentConversationId}
-        onSelectConversation={handleSelectConversation}
-        onNewConversation={handleNewConversation}
-      />
-      <ChatInterface
-        conversation={currentConversation}
-        onSendMessage={handleSendMessage}
-        isLoading={isLoading}
-      />
+
+      <div className="aws-main-workspace">
+        <Sidebar
+          conversations={conversations}
+          currentConversationId={currentConversationId}
+          onSelectConversation={handleSelectConversation}
+          onNewConversation={handleNewConversation}
+        />
+        <ChatInterface
+          conversation={currentConversation}
+          onSendMessage={handleSendMessage}
+          isLoading={isLoading}
+        />
+      </div>
     </div>
   );
 }

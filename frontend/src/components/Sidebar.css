@@ -1,39 +1,74 @@
-.sidebar {
-  width: 260px;
-  background: #f8f8f8;
-  border-right: 1px solid #e0e0e0;
+.aws-sidebar {
+  width: 270px;
+  background: #16202c;
+  border-right: 1px solid #283648;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
+  user-select: none;
 }
 
-.sidebar-header {
-  padding: 16px;
-  border-bottom: 1px solid #e0e0e0;
+.sidebar-action-bar {
+  padding: 14px 12px;
+  border-bottom: 1px solid #212c3d;
 }
 
-.sidebar-header h1 {
-  font-size: 18px;
-  margin: 0 0 12px 0;
-  color: #333;
-}
-
-.new-conversation-btn {
+.aws-new-session-btn {
   width: 100%;
-  padding: 10px;
-  background: #4a90e2;
-  border: 1px solid #4a90e2;
-  border-radius: 6px;
-  color: #fff;
+  padding: 10px 14px;
+  background: #ff9900;
+  border: 1px solid #ec7211;
+  border-radius: 4px;
+  color: #0f1b2a;
   cursor: pointer;
-  font-size: 14px;
-  transition: background 0.2s;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(255, 153, 0, 0.2);
+  transition: all 0.15s ease;
 }
 
-.new-conversation-btn:hover {
-  background: #357abd;
-  border-color: #357abd;
+.aws-new-session-btn:hover {
+  background: #ec7211;
+  box-shadow: 0 4px 12px rgba(236, 114, 17, 0.35);
+  transform: translateY(-1px);
+}
+
+.aws-btn-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.sidebar-search-box {
+  padding: 10px 12px;
+}
+
+.sidebar-search-input {
+  width: 100%;
+  padding: 7px 10px;
+  background: #0f172a;
+  border: 1px solid #283749;
+  border-radius: 4px;
+  color: #e2e8f0;
+  font-size: 12px;
+  outline: none;
+}
+
+.sidebar-search-input:focus {
+  border-color: #ff9900;
+}
+
+.sidebar-section-title {
+  padding: 8px 14px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid #1f2937;
 }
 
 .conversation-list {
@@ -43,36 +78,155 @@
 }
 
 .no-conversations {
-  padding: 16px;
+  padding: 24px 12px;
   text-align: center;
-  color: #999;
-  font-size: 14px;
+  color: #64748b;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .conversation-item {
-  padding: 12px;
+  padding: 10px 12px;
   margin-bottom: 4px;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background 0.2s;
+  background: transparent;
+  border: 1px solid transparent;
+  border-left: 3px solid transparent;
+  transition: all 0.15s ease;
 }
 
 .conversation-item:hover {
-  background: #f0f0f0;
+  background: #1f2b3a;
+  border-color: #283749;
 }
 
 .conversation-item.active {
-  background: #e8f0fe;
-  border: 1px solid #4a90e2;
+  background: #1c2738;
+  border-color: #283749;
+  border-left-color: #ff9900;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .conversation-title {
-  color: #333;
-  font-size: 14px;
-  margin-bottom: 4px;
+  color: #f1f5f9;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.conversation-item.active .conversation-title {
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .conversation-meta {
-  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.meta-badge {
+  background: rgba(255, 153, 0, 0.1);
+  color: #ff9900;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.meta-date {
+  color: #64748b;
+}
+
+/* Neuros Telemetry Panel */
+.neuros-telemetry-panel {
+  background: #0d141e;
+  border-top: 1px solid #283648;
+  padding: 12px;
+  font-size: 11px;
+}
+
+.neuros-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.neuros-spark-glow {
   font-size: 12px;
+  color: #f59e0b;
+  animation: spark-pulse 2s infinite ease-in-out;
+}
+
+@keyframes spark-pulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.neuros-panel-title {
+  font-weight: 700;
+  color: #f59e0b;
+  letter-spacing: 0.6px;
+  font-size: 10.5px;
+}
+
+.neuros-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.neuros-metric {
+  background: #151e29;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #233044;
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-label {
+  color: #64748b;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.metric-val {
+  color: #e2e8f0;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.text-amber {
+  color: #f59e0b;
+}
+
+.text-green {
+  color: #10b981;
+}
+
+.text-cyan {
+  color: #06b6d4;
 }

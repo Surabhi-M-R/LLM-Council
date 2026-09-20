@@ -4,15 +4,33 @@
 
 const API_BASE = 'http://localhost:8001';
 
+const handleFetch = async (url, options) => {
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.detail || `Server error (${response.status})`);
+    }
+    return response;
+  } catch (err) {
+    if (err.message && err.message.includes('Server error')) {
+      throw err;
+    }
+    if (err.name === 'TypeError' || err.message?.includes('Failed to fetch')) {
+      throw new Error(
+        'Backend server is disconnected (http://localhost:8001). Please start the backend server using: python -m backend.main'
+      );
+    }
+    throw err;
+  }
+};
+
 export const api = {
   /**
    * List all conversations.
    */
   async listConversations() {
-    const response = await fetch(`${API_BASE}/api/conversations`);
-    if (!response.ok) {
-      throw new Error('Failed to list conversations');
-    }
+    const response = await handleFetch(`${API_BASE}/api/conversations`);
     return response.json();
   },
 
@@ -20,16 +38,13 @@ export const api = {
    * Create a new conversation.
    */
   async createConversation() {
-    const response = await fetch(`${API_BASE}/api/conversations`, {
+    const response = await handleFetch(`${API_BASE}/api/conversations`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({}),
     });
-    if (!response.ok) {
-      throw new Error('Failed to create conversation');
-    }
     return response.json();
   },
 
@@ -37,12 +52,9 @@ export const api = {
    * Get a specific conversation.
    */
   async getConversation(conversationId) {
-    const response = await fetch(
+    const response = await handleFetch(
       `${API_BASE}/api/conversations/${conversationId}`
     );
-    if (!response.ok) {
-      throw new Error('Failed to get conversation');
-    }
     return response.json();
   },
 
@@ -50,7 +62,7 @@ export const api = {
    * Send a message in a conversation.
    */
   async sendMessage(conversationId, content) {
-    const response = await fetch(
+    const response = await handleFetch(
       `${API_BASE}/api/conversations/${conversationId}/message`,
       {
         method: 'POST',
@@ -60,9 +72,6 @@ export const api = {
         body: JSON.stringify({ content }),
       }
     );
-    if (!response.ok) {
-      throw new Error('Failed to send message');
-    }
     return response.json();
   },
 
@@ -74,19 +83,26 @@ export const api = {
    * @returns {Promise<void>}
    */
   async sendMessageStream(conversationId, content, onEvent) {
-    const response = await fetch(
-      `${API_BASE}/api/conversations/${conversationId}/message/stream`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ content }),
-      }
-    );
+    let response;
+    try {
+      response = await fetch(
+        `${API_BASE}/api/conversations/${conversationId}/message/stream`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ content }),
+        }
+      );
+    } catch (err) {
+      throw new Error(
+        'Backend server is disconnected (http://localhost:8001). Please start the backend server using: python -m backend.main'
+      );
+    }
 
     if (!response.ok) {
-      throw new Error('Failed to send message');
+      throw new Error('Failed to send message: Server returned ' + response.status);
     }
 
     const reader = response.body.getReader();
@@ -116,3 +132,4 @@ export const api = {
     }
   },
 };
+

@@ -13,26 +13,38 @@ export default function Stage1({ responses }) {
 
   return (
     <div className="stage stage1">
-      <h3 className="stage-title">Stage 1: Individual Responses</h3>
+      <div className="stage-header-bar">
+        <span className="stage-num-badge">STAGE 1</span>
+        <h3 className="stage-title">Neuros Multi-Model Parallel Querying</h3>
+        <span className="node-count-badge">{responses.length} Nodes</span>
+      </div>
 
-      <div className="tabs">
-        {responses.map((resp, index) => (
-          <button
-            key={index}
-            className={`tab ${activeTab === index ? 'active' : ''} ${resp.error ? 'tab-error' : ''}`}
-            onClick={() => setActiveTab(index)}
-          >
-            {resp.model.split('/')[1] || resp.model}
-            {resp.error ? ' ⚠️' : ''}
-          </button>
-        ))}
+      <div className="aws-tabs">
+        {responses.map((resp, index) => {
+          const shortName = resp.model.split('/')[1] || resp.model;
+          return (
+            <button
+              key={index}
+              className={`aws-tab ${activeTab === index ? 'active' : ''} ${resp.error ? 'tab-error' : ''}`}
+              onClick={() => setActiveTab(index)}
+            >
+              <span className="tab-node-icon">Node {String.fromCharCode(65 + index)}</span>
+              <span className="tab-model-name">{shortName}</span>
+              {resp.error && <span className="error-icon">⚠️</span>}
+            </button>
+          );
+        })}
       </div>
 
       <div className="tab-content">
-        <div className="model-name">{current.model}</div>
+        <div className="model-info-bar">
+          <span className="aws-resource-type">AWS::Bedrock::ModelNode</span>
+          <span className="model-full-name">{current.model}</span>
+        </div>
+
         {current.error ? (
           <div className="stage-error">
-            <strong>Model Error:</strong> {current.error}
+            <strong>Model Execution Error:</strong> {current.error}
           </div>
         ) : (
           <div className="response-text markdown-content">
