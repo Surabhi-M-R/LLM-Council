@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   overflow: hidden;
   background: var(--aws-main-bg);
@@ -17,6 +18,7 @@
   display: flex;
   flex: 1;
   height: calc(100vh - 48px);
+  height: calc(100dvh - 48px);
   overflow: hidden;
   position: relative;
 }
@@ -87,4 +89,16 @@
   color: #fca5a5;
   font-size: 13px;
   font-family: var(--font-sans);
+  word-break: break-word;
+}
+
+@media (max-width: 600px) {
+  .banner-error {
+    top: 52px;
+    left: 12px;
+    right: 12px;
+    max-width: calc(100vw - 24px);
+    padding: 10px 12px;
+    font-size: 12px;
+  }
 }

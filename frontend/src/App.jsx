@@ -261,6 +261,7 @@ function App() {
           conversation={currentConversation}
           onSendMessage={handleSendMessage}
           isLoading={isLoading}
+          onNewConversation={handleNewConversation}
         />
       </div>
 

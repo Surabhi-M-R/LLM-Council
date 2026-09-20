@@ -56,9 +56,11 @@
     left: 0;
     bottom: 0;
     height: calc(100vh - 48px);
+    height: calc(100dvh - 48px);
     width: 280px;
     max-width: 85vw;
     box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+    will-change: transform;
   }
 
   .aws-sidebar.closed {
@@ -83,6 +85,24 @@
 
   .sidebar-mobile-header {
     display: flex;
+  }
+}
+
+@media (max-width: 380px) {
+  .aws-sidebar {
+    width: 250px;
+  }
+
+  .neuros-telemetry-panel {
+    padding: 8px;
+  }
+
+  .metric-label {
+    font-size: 8.5px;
+  }
+
+  .metric-val {
+    font-size: 10px;
   }
 }
 

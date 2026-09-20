@@ -323,3 +323,32 @@
     justify-content: flex-end;
     gap: 12px;
 }
+
+@media (max-width: 480px) {
+    .cognito-modal-content {
+        width: 95vw;
+        max-width: 95vw;
+    }
+
+    .cognito-modal-header {
+        padding: 14px 16px;
+    }
+
+    .cognito-body {
+        padding: 16px;
+    }
+
+    .cognito-user-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 12px;
+    }
+
+    .cognito-actions {
+        flex-direction: column;
+    }
+
+    .cognito-actions .cognito-btn {
+        width: 100%;
+    }
+}

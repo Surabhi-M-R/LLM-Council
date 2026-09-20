@@ -27,6 +27,7 @@
   color: #ff9900;
   font-size: 14px;
   font-weight: 700;
+  flex-wrap: wrap;
 }
 
 .metrics-sub {
@@ -34,6 +35,7 @@
   font-size: 11.5px;
   margin-top: 2px;
   display: block;
+  line-height: 1.4;
 }
 
 .aggregate-list {
@@ -75,7 +77,8 @@
   font-size: 13px;
   font-weight: 700;
   color: #f1f5f9;
-  min-width: 50px;
+  min-width: 48px;
+  flex-shrink: 0;
 }
 
 .rank-details {
@@ -83,12 +86,15 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 0;
 }
 
 .rank-model-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 
 .rank-model-name {
@@ -96,11 +102,13 @@
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 600;
+  word-break: break-word;
 }
 
 .rank-score-pill {
   font-size: 11.5px;
   color: #94a3b8;
+  white-space: nowrap;
 }
 
 .rank-score-pill strong {
@@ -147,6 +155,7 @@
   color: #94a3b8;
   font-size: 12px;
   margin-bottom: 12px;
+  line-height: 1.45;
 }
 
 .aws-resource-type.purple {
@@ -179,4 +188,32 @@
 
 .parsed-list li {
   margin: 3px 0;
+}
+
+@media (max-width: 576px) {
+  .aws-metrics-dashboard {
+    padding: 12px 10px;
+  }
+
+  .aggregate-item {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .rank-position-badge {
+    min-width: 38px;
+    font-size: 11.5px;
+  }
+
+  .rank-model-name {
+    font-size: 12px;
+  }
+
+  .rank-score-pill {
+    font-size: 10.5px;
+  }
+
+  .parsed-ranking-box {
+    padding: 8px 10px;
+  }
 }

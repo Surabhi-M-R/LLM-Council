@@ -411,7 +411,50 @@
   animation: spark-spin 1.5s infinite linear;
 }
 
-/* Mobile Media Queries */
+/* Messages Feed Container Max-Width for Ultra-Wide Monitors */
+.messages-container-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.aws-input-form-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.aws-hero-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #ff9900, #ec7211);
+  color: #0f1b2a;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(255, 153, 0, 0.3);
+  transition: all 0.2s ease;
+  margin-top: 12px;
+}
+
+.aws-hero-action-btn:hover {
+  background: linear-gradient(135deg, #ffa826, #ff9900);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 153, 0, 0.45);
+}
+
+/* Mobile & Tablet Media Queries */
+@media (min-width: 1440px) {
+  .messages-container {
+    padding: 32px 48px;
+  }
+}
+
 @media (max-width: 768px) {
   .messages-container {
     padding: 16px 14px;
@@ -431,6 +474,13 @@
     display: none;
   }
 
+  .bc-item.active {
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .hint-pill.font-mono {
     display: none;
   }
@@ -442,5 +492,63 @@
 
   .aws-empty-hero h2 {
     font-size: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .aws-message-textarea {
+    font-size: 16px;
+    /* Prevents auto-zoom on mobile safari/chrome */
+  }
+
+  .hint-pill {
+    display: none;
+  }
+
+  .input-toolbar {
+    justify-content: flex-end;
+  }
+
+  .aws-send-button {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .messages-container {
+    padding: 12px 10px;
+  }
+
+  .aws-input-form {
+    padding: 8px 10px 10px 10px;
+  }
+
+  .aws-console-breadcrumbs {
+    padding: 0 8px;
+    font-size: 10.5px;
+    gap: 4px;
+  }
+
+  .bc-item.active {
+    max-width: 110px;
+  }
+
+  .aws-status-indicator {
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+
+  .user-message .message-content {
+    padding: 12px;
+  }
+
+  .aws-empty-hero h2 {
+    font-size: 18px;
+  }
+
+  .aws-hero-subtitle {
+    font-size: 12.5px;
   }
 }

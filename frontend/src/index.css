@@ -47,28 +47,34 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
+html,
 body {
   margin: 0;
+  padding: 0;
   min-width: 320px;
-  min-height: 100vh;
+  height: 100%;
+  height: 100dvh;
   background: var(--aws-main-bg);
   color: var(--text-primary);
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
-  height: 100vh;
+  height: 100%;
+  height: 100dvh;
   width: 100vw;
   overflow: hidden;
 }
 
 /* Custom AWS Dark Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -84,12 +90,14 @@ body {
   background: #ff9900;
 }
 
-/* Markdown content styling */
+/* Responsive Markdown content styling */
 .markdown-content {
   font-family: var(--font-sans);
   font-size: 14.5px;
   line-height: 1.65;
   color: #e2e8f0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .markdown-content p {
@@ -108,14 +116,15 @@ body {
   color: #ffffff;
   font-weight: 600;
   letter-spacing: -0.2px;
+  line-height: 1.35;
 }
 
 .markdown-content h1 {
-  font-size: 1.4em;
+  font-size: 1.35em;
 }
 
 .markdown-content h2 {
-  font-size: 1.25em;
+  font-size: 1.2em;
   border-bottom: 1px solid var(--aws-border);
   padding-bottom: 4px;
 }
@@ -128,7 +137,7 @@ body {
 .markdown-content ul,
 .markdown-content ol {
   margin: 0 0 14px 0;
-  padding-left: 22px;
+  padding-left: 20px;
 }
 
 .markdown-content li {
@@ -138,13 +147,15 @@ body {
 .markdown-content pre {
   background: #090d14;
   border: 1px solid var(--aws-border);
-  padding: 14px;
+  padding: 12px 14px;
   border-radius: 6px;
   overflow-x: auto;
+  max-width: 100%;
   margin: 12px 0;
   font-family: var(--font-mono);
   font-size: 13px;
   color: #f8fafc;
+  -webkit-overflow-scrolling: touch;
 }
 
 .markdown-content code {
@@ -155,6 +166,7 @@ body {
   font-family: var(--font-mono);
   font-size: 0.88em;
   border: 1px solid rgba(255, 153, 0, 0.2);
+  word-break: break-word;
 }
 
 .markdown-content pre code {
@@ -162,15 +174,47 @@ body {
   padding: 0;
   border: none;
   color: inherit;
+  white-space: pre;
+  word-break: normal;
 }
 
 .markdown-content blockquote {
   margin: 14px 0;
-  padding: 8px 16px;
+  padding: 8px 14px;
   border-left: 3px solid var(--aws-orange);
   background: rgba(255, 153, 0, 0.05);
   color: #cbd5e1;
   border-radius: 0 4px 4px 0;
+}
+
+/* Responsive Table in Markdown */
+.markdown-content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 14px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.markdown-content th,
+.markdown-content td {
+  padding: 8px 12px;
+  border: 1px solid var(--aws-border);
+  font-size: 13px;
+  text-align: left;
+}
+
+.markdown-content th {
+  background: #141c28;
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.markdown-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
 }
 
 /* AWS Shimmer Animated Bar */
@@ -190,5 +234,16 @@ body {
 
   100% {
     background-position: -200% 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .markdown-content {
+    font-size: 13.5px;
+  }
+
+  .markdown-content pre {
+    padding: 10px 12px;
+    font-size: 12px;
   }
 }
