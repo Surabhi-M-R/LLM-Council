@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import AWSHeader from './components/AWSHeader';
 import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
+import CognitoAuthModal from './components/CognitoAuthModal';
 import { api } from './api';
 import './App.css';
 
@@ -11,6 +12,20 @@ function App() {
   const [currentConversation, setCurrentConversation] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('llm_council_user') || null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth >= 768);
+
+  // Close sidebar automatically on screen resize to mobile
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsSidebarOpen(true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Load conversations on mount
   useEffect(() => {
@@ -199,7 +214,12 @@ function App() {
 
   return (
     <div className="app">
-      <AWSHeader currentConversationTitle={currentConversation?.title} />
+      <AWSHeader
+        currentConversationTitle={currentConversation?.title}
+        user={currentUser}
+        onOpenAuth={() => setIsAuthModalOpen(true)}
+        onToggleSidebar={() => setIsSidebarOpen((prev) => !prev)}
+      />
 
       {errorMessage && (
         <div className="banner-error">
@@ -215,6 +235,8 @@ function App() {
           currentConversationId={currentConversationId}
           onSelectConversation={handleSelectConversation}
           onNewConversation={handleNewConversation}
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
         />
         <ChatInterface
           conversation={currentConversation}
@@ -222,6 +244,13 @@ function App() {
           isLoading={isLoading}
         />
       </div>
+
+      <CognitoAuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        user={currentUser}
+        onAuthSuccess={(user) => setCurrentUser(user)}
+      />
     </div>
   );
 }

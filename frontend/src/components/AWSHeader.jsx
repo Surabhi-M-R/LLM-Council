@@ -1,12 +1,29 @@
 import { useState } from 'react';
 import './AWSHeader.css';
 
-export default function AWSHeader({ currentConversationTitle }) {
+export default function AWSHeader({ currentConversationTitle, user, onOpenAuth, onToggleSidebar }) {
     const [searchQuery, setSearchQuery] = useState('');
+
+    const avatarText = user ? user.substring(0, 2).toUpperCase() : 'NC';
+    const usernameText = user ? `${user} (Cognito)` : 'Sign In';
 
     return (
         <header className="aws-console-header">
             <div className="aws-header-left">
+                {/* Mobile Menu Toggle Button */}
+                <button
+                    className="aws-sidebar-toggle-btn"
+                    onClick={onToggleSidebar}
+                    aria-label="Toggle Sidebar Navigation"
+                    title="Toggle Sidebar"
+                >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+
                 {/* AWS Logo & Console Brand */}
                 <div className="aws-brand-container">
                     <svg className="aws-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,8 +40,8 @@ export default function AWSHeader({ currentConversationTitle }) {
                 {/* Neuros Engine Status Pill */}
                 <div className="neuros-header-pill">
                     <span className="neuros-pulse-dot"></span>
-                    <span className="neuros-pill-label">NEUROS CORE v2.4</span>
-                    <span className="neuros-pill-badge">Matrix Active</span>
+                    <span className="neuros-pill-label">BEDROCK ENGINE v2.4</span>
+                    <span className="neuros-pill-badge">Active</span>
                 </div>
             </div>
 
@@ -37,7 +54,7 @@ export default function AWSHeader({ currentConversationTitle }) {
                     </svg>
                     <input
                         type="text"
-                        placeholder="Search AWS services, models, prompts [Alt+S]"
+                        placeholder="Search models, council sessions..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="aws-search-input"
@@ -55,25 +72,13 @@ export default function AWSHeader({ currentConversationTitle }) {
                         <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
                         <path d="M2 12h20"></path>
                     </svg>
-                    <span>us-east-1 (N. Virginia)</span>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
+                    <span className="region-text">us-east-1</span>
                 </div>
 
-                {/* Claude Sparkle Indicator */}
-                <div className="aws-widget-item claude-telemetry-badge" title="Claude Neural Engine Integration">
-                    <span className="claude-spark-icon">✨</span>
-                    <span className="claude-badge-text">Claude Synth</span>
-                </div>
-
-                {/* Account / User Menu */}
-                <div className="aws-widget-item aws-user-account">
-                    <div className="aws-user-avatar">NC</div>
-                    <span className="aws-user-id">Neuros_Admin @ 9842-4912</span>
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
+                {/* Account / User Menu (Click opens Cognito Modal) */}
+                <div className="aws-widget-item aws-user-account" onClick={onOpenAuth} style={{ cursor: 'pointer' }} title="AWS Cognito User Profile">
+                    <div className="aws-user-avatar">{avatarText}</div>
+                    <span className="aws-user-id">{usernameText}</span>
                 </div>
             </div>
         </header>

@@ -1,0 +1,27 @@
+ERR (ResourceNotFoundException (EOL / Invalid ID)): us.anthropic.claude-3-5-sonnet-20241022-v2:0
+ERR (ResourceNotFoundException (EOL / Invalid ID)): anthropic.claude-3-5-sonnet-20241022-v2:0
+ERR (ResourceNotFoundException (EOL / Invalid ID)): us.anthropic.claude-3-5-haiku-20241022-v1:0
+ERR (ResourceNotFoundException (EOL / Invalid ID)): anthropic.claude-3-5-haiku-20241022-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): us.anthropic.claude-3-haiku-20240307-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): anthropic.claude-3-haiku-20240307-v1:0
+ERR (ResourceNotFoundException (EOL / Invalid ID)): us.anthropic.claude-3-sonnet-20240229-v1:0
+ERR (ResourceNotFoundException (EOL / Invalid ID)): anthropic.claude-3-sonnet-20240229-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): us.amazon.nova-pro-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): amazon.nova-pro-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): us.amazon.nova-lite-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): amazon.nova-lite-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): us.amazon.nova-micro-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): amazon.nova-micro-v1:0
+ERR (ResourceNotFoundException (EOL / Invalid ID)): amazon.titan-text-express-v1
+ERR (ResourceNotFoundException (EOL / Invalid ID)): amazon.titan-text-premier-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): us.meta.llama3-3-70b-instruct-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): meta.llama3-3-70b-instruct-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): us.meta.llama3-1-70b-instruct-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): meta.llama3-1-70b-instruct-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): us.meta.llama3-1-8b-instruct-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): meta.llama3-1-8b-instruct-v1:0
+ERR (ResourceNotFoundException (EOL / Invalid ID)): us.meta.llama3-2-3b-instruct-v1:0
+ERR (ResourceNotFoundException (EOL / Invalid ID)): meta.llama3-2-3b-instruct-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): us.mistral.mistral-large-2407-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): mistral.mistral-large-2402-v1:0
+ERR (ValidationException (Operation not allowed / Invalid Model)): mistral.mistral-small-2402-v1:0

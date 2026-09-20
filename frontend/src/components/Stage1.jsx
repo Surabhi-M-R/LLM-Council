@@ -2,6 +2,18 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './Stage1.css';
 
+function getShortModelName(model) {
+  if (!model) return 'Node';
+  if (model.includes('/')) return model.split('/')[1];
+  if (model.includes(':')) {
+    const parts = model.split(':');
+    const base = parts[0].split('.').pop();
+    return `${base}:${parts[1]}`;
+  }
+  if (model.includes('.')) return model.split('.').pop();
+  return model;
+}
+
 export default function Stage1({ responses }) {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -21,7 +33,7 @@ export default function Stage1({ responses }) {
 
       <div className="aws-tabs">
         {responses.map((resp, index) => {
-          const shortName = resp.model.split('/')[1] || resp.model;
+          const shortName = getShortModelName(resp.model);
           return (
             <button
               key={index}

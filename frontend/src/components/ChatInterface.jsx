@@ -49,12 +49,12 @@ export default function ChatInterface({
           </div>
           <h2>AWS LLM Council Matrix</h2>
           <p className="aws-hero-subtitle">
-            Powered by <strong>Neuros Neural Engine v2.4</strong> & <strong>Claude Synthesis</strong>
+            Powered by <strong>Neuros Neural Engine v2.4</strong> & <strong>AWS Bedrock Consensus</strong>
           </p>
           <div className="aws-feature-pills">
             <span className="pill">⚡ 3-Stage Peer Deliberation</span>
-            <span className="pill">✨ Claude Warm Shimmer</span>
             <span className="pill">🛡️ Anonymized Scoring</span>
+            <span className="pill">🎯 Executive Synthesis</span>
           </div>
           <p className="aws-empty-instruction">
             Select an existing session from the sidebar or click <strong>+ New Deliberation Session</strong> to begin.
@@ -87,11 +87,11 @@ export default function ChatInterface({
       <div className="messages-container">
         {conversation.messages.length === 0 ? (
           <div className="aws-empty-chat">
-            <div className="claude-sparkle-intro">
+            <div className="aws-sparkle-intro">
               <span className="sparkle">✨</span>
             </div>
             <h3>Initiate Deliberation Session</h3>
-            <p>Type your query below to launch multi-model consensus across AWS Bedrock & Claude nodes.</p>
+            <p>Type your query below to launch multi-model consensus across AWS Bedrock nodes.</p>
           </div>
         ) : (
           conversation.messages.map((msg, index) => (
@@ -119,19 +119,19 @@ export default function ChatInterface({
 
                   {msg.error && (
                     <div className="stage-error">
-                      <strong>OpenRouter Error:</strong> {msg.error}
+                      <strong>AWS Bedrock Error:</strong> {msg.error}
                     </div>
                   )}
 
                   {/* Stage 1 Loading & Content */}
                   {msg.loading?.stage1 && (
-                    <div className="claude-stage-loading">
-                      <div className="claude-shimmer-bar"></div>
+                    <div className="aws-stage-loading">
+                      <div className="aws-shimmer-bar"></div>
                       <div className="loading-body">
-                        <span className="claude-sparkle-spin">✨</span>
+                        <span className="aws-sparkle-spin">✨</span>
                         <div className="loading-text">
                           <strong>Stage 1: Multi-Model Querying</strong>
-                          <span>Dispatching prompt across independent AWS & Claude LLM nodes...</span>
+                          <span>Dispatching prompt across independent AWS Bedrock LLM nodes...</span>
                         </div>
                       </div>
                     </div>
@@ -140,10 +140,10 @@ export default function ChatInterface({
 
                   {/* Stage 2 Loading & Content */}
                   {msg.loading?.stage2 && (
-                    <div className="claude-stage-loading">
-                      <div className="claude-shimmer-bar"></div>
+                    <div className="aws-stage-loading">
+                      <div className="aws-shimmer-bar"></div>
                       <div className="loading-body">
-                        <span className="claude-sparkle-spin">✨</span>
+                        <span className="aws-sparkle-spin">✨</span>
                         <div className="loading-text">
                           <strong>Stage 2: Neuros Peer Review Matrix</strong>
                           <span>Anonymizing outputs and generating peer ranking evaluations...</span>
@@ -161,12 +161,12 @@ export default function ChatInterface({
 
                   {/* Stage 3 Loading & Content */}
                   {msg.loading?.stage3 && (
-                    <div className="claude-stage-loading">
-                      <div className="claude-shimmer-bar"></div>
+                    <div className="aws-stage-loading">
+                      <div className="aws-shimmer-bar"></div>
                       <div className="loading-body">
-                        <span className="claude-sparkle-spin">✨</span>
+                        <span className="aws-sparkle-spin">✨</span>
                         <div className="loading-text">
-                          <strong>Stage 3: Claude Executive Synthesis</strong>
+                          <strong>Stage 3: Executive Consensus Synthesis</strong>
                           <span>Synthesizing final consensus answer...</span>
                         </div>
                       </div>
@@ -181,10 +181,10 @@ export default function ChatInterface({
 
         {/* Global Loading Indicator if starting */}
         {isLoading && !conversation.messages[conversation.messages.length - 1]?.loading && (
-          <div className="claude-global-loading">
-            <div className="claude-shimmer-bar"></div>
+          <div className="aws-global-loading">
+            <div className="aws-shimmer-bar"></div>
             <div className="loading-content">
-              <span className="claude-sparkle-pulse">✨</span>
+              <span className="aws-sparkle-pulse">✨</span>
               <span>Neuros AI Engine deliberating...</span>
             </div>
           </div>
@@ -217,7 +217,7 @@ export default function ChatInterface({
             >
               {isLoading ? (
                 <>
-                  <span className="claude-btn-spark">✨</span>
+                  <span className="aws-btn-spark">✨</span>
                   <span>Synthesizing...</span>
                 </>
               ) : (

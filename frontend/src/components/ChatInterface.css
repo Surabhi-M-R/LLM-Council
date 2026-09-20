@@ -162,7 +162,7 @@
   color: #64748b;
 }
 
-.claude-sparkle-intro .sparkle {
+.aws-sparkle-intro .sparkle {
   font-size: 28px;
   color: #f59e0b;
   display: inline-block;
@@ -252,8 +252,8 @@
   border-radius: 0 3px 3px 0;
 }
 
-/* Claude Stage Loading Box */
-.claude-stage-loading {
+/* AWS Stage Loading Box */
+.aws-stage-loading {
   margin: 16px 0;
   background: #1a1714;
   border: 1px solid #382d22;
@@ -269,10 +269,20 @@
   gap: 12px;
 }
 
-.claude-sparkle-spin {
+.aws-sparkle-spin {
   font-size: 18px;
   color: #f59e0b;
   animation: spark-spin 2s infinite linear;
+}
+
+@keyframes spark-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-text {
@@ -292,7 +302,7 @@
   font-size: 12px;
 }
 
-.claude-global-loading {
+.aws-global-loading {
   margin: 16px 0;
   background: #182230;
   border: 1px solid #283749;
@@ -396,7 +406,41 @@
   cursor: not-allowed;
 }
 
-.claude-btn-spark {
+.aws-btn-spark {
   font-size: 12px;
   animation: spark-spin 1.5s infinite linear;
+}
+
+/* Mobile Media Queries */
+@media (max-width: 768px) {
+  .messages-container {
+    padding: 16px 14px;
+  }
+
+  .aws-input-form {
+    padding: 10px 14px 14px 14px;
+  }
+
+  .aws-console-breadcrumbs {
+    padding: 0 12px;
+    font-size: 11px;
+  }
+
+  .bc-root,
+  .bc-sep:first-of-type {
+    display: none;
+  }
+
+  .hint-pill.font-mono {
+    display: none;
+  }
+
+  .aws-empty-hero {
+    margin: 16px;
+    padding: 24px 16px;
+  }
+
+  .aws-empty-hero h2 {
+    font-size: 20px;
+  }
 }

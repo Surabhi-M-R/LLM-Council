@@ -1,0 +1,325 @@
+.cognito-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(9, 14, 23, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.cognito-modal-content {
+    background: #161e2e;
+    border: 1px solid #2e3b52;
+    border-radius: 10px;
+    width: 440px;
+    max-width: 90vw;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 153, 0, 0.1);
+    overflow: hidden;
+    color: #e1e7ef;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.cognito-modal-header {
+    background: #0f1724;
+    padding: 18px 24px;
+    border-bottom: 1px solid #232f3e;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cognito-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cognito-logo {
+    width: 28px;
+    height: 28px;
+}
+
+.cognito-title {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #ffffff;
+}
+
+.cognito-subtitle {
+    display: block;
+    font-size: 0.75rem;
+    color: #8c9ba5;
+    margin-top: 2px;
+}
+
+.cognito-close-btn {
+    background: none;
+    border: none;
+    color: #8c9ba5;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.cognito-close-btn:hover {
+    color: #ffffff;
+}
+
+.cognito-alert {
+    padding: 10px 16px;
+    font-size: 0.82rem;
+    border-bottom: 1px solid transparent;
+}
+
+.cognito-alert.error {
+    background: rgba(224, 76, 56, 0.15);
+    border-color: #e04c38;
+    color: #ff9e92;
+}
+
+.cognito-alert.success {
+    background: rgba(30, 161, 137, 0.15);
+    border-color: #1ea189;
+    color: #7ce3d0;
+}
+
+.cognito-body {
+    padding: 24px;
+}
+
+.cognito-tabs {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid #232f3e;
+    margin-bottom: 20px;
+}
+
+.cognito-tab {
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    color: #8c9ba5;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.cognito-tab:hover {
+    color: #ffffff;
+}
+
+.cognito-tab.active {
+    color: #ff9900;
+    border-bottom-color: #ff9900;
+}
+
+.cognito-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.78rem;
+    color: #a0b0c0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.cognito-input {
+    background: #0d131d;
+    border: 1px solid #2a374d;
+    border-radius: 6px;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.cognito-input:focus {
+    border-color: #ff9900;
+    box-shadow: 0 0 0 2px rgba(255, 153, 0, 0.2);
+}
+
+.code-input {
+    font-family: monospace;
+    letter-spacing: 4px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.cognito-input.input-valid {
+    border-color: #1ea189;
+}
+
+.cognito-input.input-invalid {
+    border-color: #e04c38;
+}
+
+.password-policy-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 6px;
+    padding: 8px 12px;
+    background: #090e17;
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+}
+
+.policy-rule {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.76rem;
+    transition: color 0.2s;
+}
+
+.policy-rule.neutral {
+    color: #64748b;
+}
+
+.policy-rule.passed {
+    color: #34d399;
+}
+
+.policy-rule.failed {
+    color: #f87171;
+}
+
+.policy-icon {
+    font-weight: 700;
+    width: 14px;
+    display: inline-block;
+    text-align: center;
+}
+
+.cognito-btn {
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    margin-top: 8px;
+}
+
+.cognito-btn.primary {
+    background: linear-gradient(135deg, #ec7211, #ff9900);
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(236, 114, 17, 0.3);
+}
+
+.cognito-btn.primary:hover {
+    background: linear-gradient(135deg, #ff9900, #ffa826);
+    transform: translateY(-1px);
+}
+
+.cognito-btn.secondary {
+    background: #232f3e;
+    color: #d1d5db;
+    border: 1px solid #374151;
+}
+
+.cognito-btn.secondary:hover {
+    background: #374151;
+    color: #ffffff;
+}
+
+.cognito-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* User Card (Signed In State) */
+.cognito-user-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #0d131d;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #232f3e;
+    margin-bottom: 20px;
+}
+
+.user-avatar-large {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ec7211, #ff9900);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.user-card-info h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.user-role-badge {
+    display: inline-block;
+    background: rgba(30, 161, 137, 0.2);
+    color: #1ea189;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+}
+
+.user-session-id {
+    display: block;
+    font-size: 0.72rem;
+    color: #8c9ba5;
+    margin-top: 4px;
+}
+
+.cognito-info-box {
+    background: #111827;
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 20px;
+    font-size: 0.82rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    color: #9ca3af;
+}
+
+.info-row strong {
+    color: #e5e7eb;
+}
+
+.cognito-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}

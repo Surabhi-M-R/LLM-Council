@@ -16,13 +16,11 @@
   --aws-orange-light: rgba(255, 153, 0, 0.12);
   --aws-orange-glow: rgba(255, 153, 0, 0.25);
 
-  /* Claude Ember & Warm Aesthetics */
-  --claude-warm-amber: #d97706;
-  --claude-warm-ember: #f59e0b;
-  --claude-spark: #eb6f25;
-  --claude-glow: rgba(245, 158, 11, 0.15);
-  --claude-card-bg: #1a1714;
-  --claude-border: #382d22;
+  /* Warm Amber Accents */
+  --theme-warm-amber: #d97706;
+  --theme-warm-ember: #f59e0b;
+  --theme-spark: #eb6f25;
+  --theme-glow: rgba(245, 158, 11, 0.15);
 
   /* Neuros Neural Accents */
   --neuros-teal: #10b981;
@@ -86,18 +84,12 @@ body {
   background: #ff9900;
 }
 
-/* Claude Markdown content styling */
+/* Markdown content styling */
 .markdown-content {
   font-family: var(--font-sans);
   font-size: 14.5px;
   line-height: 1.65;
   color: #e2e8f0;
-}
-
-.markdown-content.claude-typography {
-  font-family: var(--font-serif);
-  font-size: 15px;
-  line-height: 1.7;
 }
 
 .markdown-content p {
@@ -181,17 +173,17 @@ body {
   border-radius: 0 4px 4px 0;
 }
 
-/* Claude Shimmer Animated Bar */
-.claude-shimmer-bar {
+/* AWS Shimmer Animated Bar */
+.aws-shimmer-bar {
   height: 3px;
   width: 100%;
-  background: linear-gradient(90deg, #d97706 0%, #f59e0b 50%, #eb6f25 100%);
+  background: linear-gradient(90deg, #d97706 0%, #ff9900 50%, #ec7211 100%);
   background-size: 200% 100%;
-  animation: claude-shimmer 2s infinite linear;
+  animation: aws-shimmer 2s infinite linear;
   border-radius: 2px;
 }
 
-@keyframes claude-shimmer {
+@keyframes aws-shimmer {
   0% {
     background-position: 200% 0;
   }

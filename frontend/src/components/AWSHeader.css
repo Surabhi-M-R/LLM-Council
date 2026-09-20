@@ -175,45 +175,29 @@
     color: #ffffff;
 }
 
-/* Claude Badge */
-.claude-telemetry-badge {
-    background: rgba(245, 158, 11, 0.12);
-    border: 1px solid rgba(245, 158, 11, 0.3);
-    color: #f59e0b;
+/* Sidebar Toggle Button (Mobile/Tablet) */
+.aws-sidebar-toggle-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
 }
 
-.claude-telemetry-badge:hover {
-    background: rgba(245, 158, 11, 0.2);
-    color: #fbbf24;
-}
-
-.claude-spark-icon {
-    font-size: 12px;
-    animation: spark-spin 4s infinite linear;
-}
-
-@keyframes spark-spin {
-
-    0%,
-    100% {
-        transform: scale(1) rotate(0deg);
-    }
-
-    50% {
-        transform: scale(1.15) rotate(15deg);
-    }
-}
-
-.claude-badge-text {
-    font-weight: 600;
-    font-size: 11px;
-    letter-spacing: 0.2px;
+.aws-sidebar-toggle-btn:hover {
+    background: #1f2d3d;
+    color: #ff9900;
 }
 
 /* User Avatar */
 .aws-user-avatar {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     background: #ff9900;
     color: #0f1b2a;
     border-radius: 50%;
@@ -227,4 +211,55 @@
 .aws-user-id {
     font-family: var(--font-mono, monospace);
     font-size: 11px;
+}
+
+/* Responsive Media Queries for AWS Console Header */
+@media (max-width: 900px) {
+    .aws-header-search {
+        flex: 0 1 240px;
+        margin: 0 8px;
+    }
+
+    .aws-search-shortcut {
+        display: none;
+    }
+
+    .neuros-pill-badge {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .aws-sidebar-toggle-btn {
+        display: flex;
+    }
+
+    .aws-header-search {
+        display: none;
+    }
+
+    .aws-console-header {
+        padding: 0 10px;
+    }
+
+    .aws-header-left {
+        gap: 8px;
+    }
+
+    .neuros-header-pill {
+        padding: 2px 6px;
+        font-size: 10px;
+    }
+
+    .neuros-pill-label {
+        font-size: 9.5px;
+    }
+
+    .aws-user-id {
+        display: none;
+    }
+
+    .region-text {
+        font-size: 10px;
+    }
 }

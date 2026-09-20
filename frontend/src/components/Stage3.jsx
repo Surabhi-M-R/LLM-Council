@@ -2,6 +2,18 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './Stage3.css';
 
+function getShortModelName(model) {
+  if (!model) return 'Node';
+  if (model.includes('/')) return model.split('/')[1];
+  if (model.includes(':')) {
+    const parts = model.split(':');
+    const base = parts[0].split('.').pop();
+    return `${base}:${parts[1]}`;
+  }
+  if (model.includes('.')) return model.split('.').pop();
+  return model;
+}
+
 export default function Stage3({ finalResponse }) {
   const [copied, setCopied] = useState(false);
 
@@ -9,7 +21,7 @@ export default function Stage3({ finalResponse }) {
     return null;
   }
 
-  const chairmanName = finalResponse.model.split('/')[1] || finalResponse.model;
+  const chairmanName = getShortModelName(finalResponse.model);
 
   const handleCopy = () => {
     if (finalResponse.response) {
@@ -23,8 +35,8 @@ export default function Stage3({ finalResponse }) {
     <div className="stage stage3">
       <div className="stage-header-bar">
         <span className="stage-num-badge gold">STAGE 3</span>
-        <h3 className="stage-title">Claude Executive Synthesis & Final Consensus</h3>
-        <span className="claude-synthesis-spark">✨</span>
+        <h3 className="stage-title">Executive Synthesis & Final Consensus</h3>
+        <span className="aws-synthesis-spark">✨</span>
       </div>
 
       <div className="final-response-hero">
@@ -53,7 +65,7 @@ export default function Stage3({ finalResponse }) {
             <strong>Chairman Error:</strong> {finalResponse.error}
           </div>
         ) : (
-          <div className="final-text markdown-content claude-typography">
+          <div className="final-text markdown-content aws-typography">
             <ReactMarkdown>{finalResponse.response}</ReactMarkdown>
           </div>
         )}

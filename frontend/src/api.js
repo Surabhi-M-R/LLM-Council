@@ -1,12 +1,62 @@
 /**
- * API client for the LLM Council backend.
+ * API client for the LLM Council backend — AWS Edition.
  */
 
 const API_BASE = 'http://localhost:8001';
 
-const handleFetch = async (url, options) => {
+// ---------------------------------------------------------------------------
+// Auth Token Management
+// ---------------------------------------------------------------------------
+
+let authToken = null;
+
+export function setAuthToken(token) {
+  authToken = token;
+  if (token) {
+    localStorage.setItem('llm_council_token', token);
+  } else {
+    localStorage.removeItem('llm_council_token');
+  }
+}
+
+export function getAuthToken() {
+  if (!authToken) {
+    authToken = localStorage.getItem('llm_council_token');
+  }
+  return authToken;
+}
+
+export function clearAuth() {
+  authToken = null;
+  localStorage.removeItem('llm_council_token');
+  localStorage.removeItem('llm_council_user');
+}
+
+// ---------------------------------------------------------------------------
+// HTTP Helpers
+// ---------------------------------------------------------------------------
+
+const getHeaders = () => {
+  const headers = { 'Content-Type': 'application/json' };
+  const token = getAuthToken();
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  return headers;
+};
+
+const handleFetch = async (url, options = {}) => {
   try {
-    const response = await fetch(url, options);
+    const response = await fetch(url, {
+      ...options,
+      headers: { ...getHeaders(), ...(options.headers || {}) },
+    });
+
+    if (response.status === 401) {
+      clearAuth();
+      throw new Error('Session expired. Please sign in again.');
+    }
+
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(errorData.detail || `Server error (${response.status})`);
@@ -14,6 +64,9 @@ const handleFetch = async (url, options) => {
     return response;
   } catch (err) {
     if (err.message && err.message.includes('Server error')) {
+      throw err;
+    }
+    if (err.message && err.message.includes('Session expired')) {
       throw err;
     }
     if (err.name === 'TypeError' || err.message?.includes('Failed to fetch')) {
@@ -25,7 +78,79 @@ const handleFetch = async (url, options) => {
   }
 };
 
+// ---------------------------------------------------------------------------
+// API Methods
+// ---------------------------------------------------------------------------
+
 export const api = {
+  // ---- System ----
+
+  /**
+   * Get system configuration (provider, models, features).
+   */
+  async getSystemConfig() {
+    const response = await handleFetch(`${API_BASE}/api/system/config`);
+    return response.json();
+  },
+
+  /**
+   * Health check.
+   */
+  async healthCheck() {
+    const response = await handleFetch(`${API_BASE}/health`);
+    return response.json();
+  },
+
+  // ---- Authentication ----
+
+  /**
+   * Sign up a new user.
+   */
+  async signUp(email, username, password) {
+    const response = await handleFetch(`${API_BASE}/api/auth/signup`, {
+      method: 'POST',
+      body: JSON.stringify({ email, username, password }),
+    });
+    return response.json();
+  },
+
+  /**
+   * Sign in and get tokens.
+   */
+  async signIn(username, password) {
+    const response = await handleFetch(`${API_BASE}/api/auth/signin`, {
+      method: 'POST',
+      body: JSON.stringify({ username, password }),
+    });
+    const data = await response.json();
+    if (data.id_token) {
+      setAuthToken(data.id_token);
+      localStorage.setItem('llm_council_user', username);
+    }
+    return data;
+  },
+
+  /**
+   * Confirm sign up with verification code.
+   */
+  async confirmSignUp(username, confirmationCode) {
+    const response = await handleFetch(`${API_BASE}/api/auth/confirm`, {
+      method: 'POST',
+      body: JSON.stringify({ username, confirmation_code: confirmationCode }),
+    });
+    return response.json();
+  },
+
+  /**
+   * Get current user info.
+   */
+  async getCurrentUser() {
+    const response = await handleFetch(`${API_BASE}/api/auth/me`);
+    return response.json();
+  },
+
+  // ---- Conversations ----
+
   /**
    * List all conversations.
    */
@@ -40,9 +165,6 @@ export const api = {
   async createConversation() {
     const response = await handleFetch(`${API_BASE}/api/conversations`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify({}),
     });
     return response.json();
@@ -59,6 +181,17 @@ export const api = {
   },
 
   /**
+   * Delete a conversation.
+   */
+  async deleteConversation(conversationId) {
+    const response = await handleFetch(
+      `${API_BASE}/api/conversations/${conversationId}`,
+      { method: 'DELETE' }
+    );
+    return response.json();
+  },
+
+  /**
    * Send a message in a conversation.
    */
   async sendMessage(conversationId, content) {
@@ -66,9 +199,6 @@ export const api = {
       `${API_BASE}/api/conversations/${conversationId}/message`,
       {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ content }),
       }
     );
@@ -89,9 +219,7 @@ export const api = {
         `${API_BASE}/api/conversations/${conversationId}/message/stream`,
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: getHeaders(),
           body: JSON.stringify({ content }),
         }
       );
@@ -99,6 +227,11 @@ export const api = {
       throw new Error(
         'Backend server is disconnected (http://localhost:8001). Please start the backend server using: python -m backend.main'
       );
+    }
+
+    if (response.status === 401) {
+      clearAuth();
+      throw new Error('Session expired. Please sign in again.');
     }
 
     if (!response.ok) {
@@ -132,4 +265,3 @@ export const api = {
     }
   },
 };
-

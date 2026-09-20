@@ -1,0 +1,55 @@
+=== REGION: us-east-1 ===
+  [ResourceNotFoundException] us.anthropic.claude-3-5-sonnet-20241022-v2:0: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ResourceNotFoundException] anthropic.claude-3-5-sonnet-20240620-v1:0: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ResourceNotFoundException] us.anthropic.claude-3-5-haiku-20241022-v1:0: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ValidationException] anthropic.claude-3-haiku-20240307-v1:0: Operation not allowed
+  [ValidationException] us.anthropic.claude-3-haiku-20240307-v1:0: Operation not allowed
+  [ValidationException] amazon.nova-micro-v1:0: Operation not allowed
+  [ValidationException] us.amazon.nova-micro-v1:0: Operation not allowed
+  [ResourceNotFoundException] amazon.titan-text-express-v1: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ValidationException] meta.llama3-8b-instruct-v1:0: Operation not allowed
+  [ValidationException] us.meta.llama3-1-8b-instruct-v1:0: Operation not allowed
+=== REGION: us-west-2 ===
+  [ResourceNotFoundException] us.anthropic.claude-3-5-sonnet-20241022-v2:0: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ResourceNotFoundException] anthropic.claude-3-5-sonnet-20240620-v1:0: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ResourceNotFoundException] us.anthropic.claude-3-5-haiku-20241022-v1:0: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ValidationException] anthropic.claude-3-haiku-20240307-v1:0: Operation not allowed
+  [ValidationException] us.anthropic.claude-3-haiku-20240307-v1:0: Operation not allowed
+  [ValidationException] amazon.nova-micro-v1:0: Operation not allowed
+  [ValidationException] us.amazon.nova-micro-v1:0: Operation not allowed
+  [ResourceNotFoundException] amazon.titan-text-express-v1: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ValidationException] meta.llama3-8b-instruct-v1:0: Operation not allowed
+  [ValidationException] us.meta.llama3-1-8b-instruct-v1:0: Operation not allowed
+=== REGION: eu-west-1 ===
+  [ValidationException] us.anthropic.claude-3-5-sonnet-20241022-v2:0: The provided model identifier is invalid.
+  [ResourceNotFoundException] anthropic.claude-3-5-sonnet-20240620-v1:0: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ValidationException] us.anthropic.claude-3-5-haiku-20241022-v1:0: The provided model identifier is invalid.
+  [ValidationException] anthropic.claude-3-haiku-20240307-v1:0: Operation not allowed
+  [ValidationException] us.anthropic.claude-3-haiku-20240307-v1:0: The provided model identifier is invalid.
+  [ValidationException] amazon.nova-micro-v1:0: Operation not allowed
+  [ValidationException] us.amazon.nova-micro-v1:0: The provided model identifier is invalid.
+  [ResourceNotFoundException] amazon.titan-text-express-v1: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ValidationException] meta.llama3-8b-instruct-v1:0: The provided model identifier is invalid.
+  [ValidationException] us.meta.llama3-1-8b-instruct-v1:0: The provided model identifier is invalid.
+=== REGION: ap-southeast-1 ===
+  [ValidationException] us.anthropic.claude-3-5-sonnet-20241022-v2:0: The provided model identifier is invalid.
+  [ValidationException] anthropic.claude-3-5-sonnet-20240620-v1:0: Operation not allowed
+  [ValidationException] us.anthropic.claude-3-5-haiku-20241022-v1:0: The provided model identifier is invalid.
+  [ValidationException] anthropic.claude-3-haiku-20240307-v1:0: Operation not allowed
+  [ValidationException] us.anthropic.claude-3-haiku-20240307-v1:0: The provided model identifier is invalid.
+  [ValidationException] amazon.nova-micro-v1:0: Operation not allowed
+  [ValidationException] us.amazon.nova-micro-v1:0: The provided model identifier is invalid.
+  [ValidationException] amazon.titan-text-express-v1: The provided model identifier is invalid.
+  [ValidationException] meta.llama3-8b-instruct-v1:0: The provided model identifier is invalid.
+  [ValidationException] us.meta.llama3-1-8b-instruct-v1:0: The provided model identifier is invalid.
+=== REGION: us-east-2 ===
+  [ResourceNotFoundException] us.anthropic.claude-3-5-sonnet-20241022-v2:0: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ResourceNotFoundException] anthropic.claude-3-5-sonnet-20240620-v1:0: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ResourceNotFoundException] us.anthropic.claude-3-5-haiku-20241022-v1:0: This model version has reached the end of its life. Please refer to the AWS documentation for more details.
+  [ValidationException] anthropic.claude-3-haiku-20240307-v1:0: Operation not allowed
+  [ValidationException] us.anthropic.claude-3-haiku-20240307-v1:0: Operation not allowed
+  [ValidationException] amazon.nova-micro-v1:0: Operation not allowed
+  [ValidationException] us.amazon.nova-micro-v1:0: Operation not allowed
+  [ValidationException] amazon.titan-text-express-v1: The provided model identifier is invalid.
+  [ValidationException] meta.llama3-8b-instruct-v1:0: The provided model identifier is invalid.
+  [ValidationException] us.meta.llama3-1-8b-instruct-v1:0: Operation not allowed

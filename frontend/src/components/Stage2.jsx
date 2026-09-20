@@ -2,12 +2,24 @@ import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import './Stage2.css';
 
+function getShortModelName(model) {
+  if (!model) return 'Node';
+  if (model.includes('/')) return model.split('/')[1];
+  if (model.includes(':')) {
+    const parts = model.split(':');
+    const base = parts[0].split('.').pop();
+    return `${base}:${parts[1]}`;
+  }
+  if (model.includes('.')) return model.split('.').pop();
+  return model;
+}
+
 function deAnonymizeText(text, labelToModel) {
   if (!labelToModel) return text;
 
   let result = text;
   Object.entries(labelToModel).forEach(([label, model]) => {
-    const modelShortName = model.split('/')[1] || model;
+    const modelShortName = getShortModelName(model);
     result = result.replace(new RegExp(label, 'g'), `**${modelShortName}**`);
   });
   return result;
@@ -47,7 +59,7 @@ export default function Stage2({ rankings, labelToModel, aggregateRankings }) {
 
           <div className="aggregate-list">
             {aggregateRankings.map((agg, index) => {
-              const shortName = agg.model.split('/')[1] || agg.model;
+              const shortName = getShortModelName(agg.model);
               // Normalize bar fill percentage (1 = 100%, higher rank number = lower bar)
               const fillPercent = Math.max(15, Math.min(100, (1 / agg.average_rank) * 100));
 
@@ -89,7 +101,7 @@ export default function Stage2({ rankings, labelToModel, aggregateRankings }) {
 
         <div className="aws-tabs">
           {rankings.map((rank, index) => {
-            const shortName = rank.model.split('/')[1] || rank.model;
+            const shortName = getShortModelName(rank.model);
             return (
               <button
                 key={index}
@@ -129,7 +141,7 @@ export default function Stage2({ rankings, labelToModel, aggregateRankings }) {
                 {rankings[activeTab].parsed_ranking.map((label, i) => (
                   <li key={i}>
                     {labelToModel && labelToModel[label]
-                      ? labelToModel[label].split('/')[1] || labelToModel[label]
+                      ? getShortModelName(labelToModel[label])
                       : label}
                   </li>
                 ))}
