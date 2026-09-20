@@ -263,5 +263,15 @@ export const api = {
         }
       }
     }
+
+    if (buffer && buffer.startsWith('data: ')) {
+      const data = buffer.slice(6);
+      try {
+        const event = JSON.parse(data);
+        onEvent(event.type, event);
+      } catch (e) {
+        console.error('Failed to parse trailing SSE event:', e);
+      }
+    }
   },
 };

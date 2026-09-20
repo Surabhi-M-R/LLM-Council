@@ -12,6 +12,7 @@ export default function ChatInterface({
 }) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
+  const textareaRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -21,11 +22,21 @@ export default function ChatInterface({
     scrollToBottom();
   }, [conversation, isLoading]);
 
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 200)}px`;
+    }
+  }, [input]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (input.trim() && !isLoading) {
       onSendMessage(input);
       setInput('');
+      if (textareaRef.current) {
+        textareaRef.current.style.height = 'auto';
+      }
     }
   };
 
@@ -197,13 +208,14 @@ export default function ChatInterface({
       <form className="aws-input-form" onSubmit={handleSubmit}>
         <div className="aws-input-container">
           <textarea
+            ref={textareaRef}
             className="aws-message-textarea"
             placeholder="Ask AWS LLM Council... (Shift+Enter for newline, Enter to transmit)"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={isLoading}
-            rows={2}
+            rows={1}
           />
           <div className="input-toolbar">
             <div className="input-hints">

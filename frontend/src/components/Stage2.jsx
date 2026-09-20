@@ -20,7 +20,7 @@ function deAnonymizeText(text, labelToModel) {
   let result = text;
   Object.entries(labelToModel).forEach(([label, model]) => {
     const modelShortName = getShortModelName(model);
-    result = result.replace(new RegExp(label, 'g'), `**${modelShortName}**`);
+    result = result.replaceAll(label, `**${modelShortName}**`);
   });
   return result;
 }

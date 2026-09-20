@@ -8,7 +8,9 @@ import './App.css';
 
 function App() {
   const [conversations, setConversations] = useState([]);
-  const [currentConversationId, setCurrentConversationId] = useState(null);
+  const [currentConversationId, setCurrentConversationId] = useState(
+    () => localStorage.getItem('llm_council_active_conv') || null
+  );
   const [currentConversation, setCurrentConversation] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -35,6 +37,7 @@ function App() {
   // Load conversation details when selected
   useEffect(() => {
     if (currentConversationId) {
+      localStorage.setItem('llm_council_active_conv', currentConversationId);
       loadConversation(currentConversationId);
     }
   }, [currentConversationId]);
@@ -44,6 +47,15 @@ function App() {
       const convs = await api.listConversations();
       setConversations(convs);
       setErrorMessage('');
+      if (convs.length > 0) {
+        const storedId = localStorage.getItem('llm_council_active_conv');
+        const exists = convs.some((c) => c.id === storedId);
+        if (storedId && exists) {
+          setCurrentConversationId(storedId);
+        } else if (!currentConversationId) {
+          setCurrentConversationId(convs[0].id);
+        }
+      }
     } catch (error) {
       console.error('Failed to load conversations:', error);
       setErrorMessage(error.message || 'Unable to connect to backend server at http://localhost:8001');
@@ -204,10 +216,17 @@ function App() {
       });
     } catch (error) {
       console.error('Failed to send message:', error);
-      setCurrentConversation((prev) => ({
-        ...prev,
-        messages: prev.messages.slice(0, -2),
-      }));
+      setCurrentConversation((prev) => {
+        if (!prev) return prev;
+        const messages = [...prev.messages];
+        const lastMsg = messages[messages.length - 1];
+        if (lastMsg && lastMsg.role === 'assistant') {
+          lastMsg.error = error.message || 'Connection error. Unable to reach backend server.';
+          lastMsg.loading = { stage1: false, stage2: false, stage3: false };
+        }
+        return { ...prev, messages };
+      });
+      setErrorMessage(error.message || 'Connection error. Unable to reach backend server.');
       setIsLoading(false);
     }
   };
